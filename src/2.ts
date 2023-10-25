@@ -38,4 +38,10 @@ class Manager extends Employee {
   }
 }
 
+// const employee = new Employee("John", "IT", 50000);
+// console.log(employee.getEmployeeDetails());
+
+// const manager = new Manager("Alice", "Marketing", 60000);
+// console.log(manager.getEmployeeDetails());
+
 export {};
