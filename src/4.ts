@@ -19,9 +19,15 @@ class Person {
 }
 
 abstract class House {
-  constructor(public tenants: string[]) {}
   public door: boolean;
   public key: Key;
+  public tenants: Person[];
+  constructor(door: boolean, key: Key) {
+    this.door = door;
+    this.key = key;
+    this.tenants = [];
+  }
+
   public comeIn(tenant: string) {
     if (this.door === true) {
       this.tenants.push(tenant);
