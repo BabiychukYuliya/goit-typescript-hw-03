@@ -13,7 +13,7 @@ class Person {
   constructor(key: Key) {
     this.key = key;
   }
-  public getKey() {
+  public getKey(): Key {
     return this.key;
   }
 }
@@ -22,26 +22,37 @@ abstract class House {
   public door: boolean;
   public key: Key;
   public tenants: Person[];
-  constructor(door: boolean, key: Key) {
+  constructor(door: boolean = false, key: Key) {
     this.door = door;
     this.key = key;
     this.tenants = [];
   }
 
-  public comeIn(tenant: string) {
-    if (this.door === true) {
-      this.tenants.push(tenant);
+  public comeIn(person: Person): void {
+    if (this.door) {
+      this.tenants.push(person);
     }
   }
-  public abstract OpenDoor(key: Key): void;
+  abstract OpenDoor(key: Key): void;
+}
+
+class MyHouse extends House {
+  constructor(door: boolean = false, key: Key) {
+    super(door, key);
+  }
+  OpenDoor(key: Key): void {
+    if (key.getSignature() === this.key.getSignature()) {
+      this.door = true;
+    }
+  }
 }
 const key = new Key();
 
-const house = new MyHouse(key);
+const house = new MyHouse(false, key);
 const person = new Person(key);
 
-house.openDoor(person.getKey());
+house.OpenDoor(person.getKey());
 
 house.comeIn(person);
 
-export {};
+// export {};
